@@ -1,0 +1,32 @@
+{
+  "name": "gelp",
+  "version": "1.0.0",
+  "description": "Video Game News/Blog",
+  "main": "server",
+  "author": "Matthew Carpenter",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "build": "cd client && yarn && yarn run build",
+    "heroku-postbuild": "yarn run build",
+    "server": "nodemon server.js",
+    "client": "cd ../ && cd client && yarn start"
+  },
+  "dependencies": {
+    "apicalypse": "^0.0.6",
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^4.1.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "moment": "^2.23.0",
+    "mongoose": "^5.4.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

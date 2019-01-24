@@ -1,14 +1,18 @@
 import React from "react";
-import { Image, Card } from "semantic-ui-react";
+import { Image } from "semantic-ui-react";
+
+const gameStyle = {
+  height: '350px', 
+  width: '250px', 
+  marginRight: '10px',
+  border:'1px solid #ccc'
+}
 
 const GameCard = (props) => {
   return (
-    <Card raised={true}>
-      <Image
-      size='big'
-      src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${props.id}.jpg`}
+      <Image rounded style={gameStyle}
+      src={`https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${props.id}.jpg`}
     />
-    </Card>
   );
 };
 

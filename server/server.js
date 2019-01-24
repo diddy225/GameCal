@@ -15,6 +15,8 @@ if (process.env.NODE_ENV === "production") {
 const localSignupStrategy = require('./passport/local-signup');
 const localLoginStrategy = require('./passport/local-login');
 require('./routes/api-igdb-switch')(app);
+require('./routes/api-igdb-xbox')(app);
+require('./routes/api-igdb-ps4')(app);
 require('./routes/auth')(app);
 
 passport.use('local-signup', localSignupStrategy);

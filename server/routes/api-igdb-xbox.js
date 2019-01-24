@@ -21,12 +21,13 @@ module.exports = function(app) {
           Accept: "application/json",
           "user-key": process.env.IGDB_KEY
         },
-        data: `fields game; where platform = 130 & human="${year}-${month}-${date}";`
+        data: `fields game; where platform = ${
+          platforms.xbox
+        } & human="${year}-${month}-${date}";`
       });
       if (gamesReleasedToday.data.length !== 0) {
         gamesReleasedToday.data.map(game => gamesId.push(game.game));
         gamesQuery = `(${gamesId.filter(id => id !== undefined).join()})`;
-
         const getCoverId = await $({
           method: "get",
           url: "https://api-v3.igdb.com/games",
@@ -36,7 +37,6 @@ module.exports = function(app) {
           },
           data: `fields name, cover; where id=${gamesQuery};`
         });
-
         getCoverId.data.map(cover => coverId.push(cover.cover));
         coverQuery = `(${coverId.join()})`;
         const getImageId = await $({
@@ -49,17 +49,14 @@ module.exports = function(app) {
           data: `fields *; where id=${coverQuery};`
         });
         getImageId.data.map(game => imageIds.push(game.image_id));
-        app.get("/api/switch", function(req, res) {
+        app.get("/api/xbox", function(req, res) {
           res.send(imageIds);
         });
-      }
-      else {
-        app.get("/api/switch", function(req, res) {
-          res.send('No switch games release today!')
+      } else {
+        app.get("/api/xbox", function(req, res) {
+          res.send('No xbox games release today!')
         })
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   })();
 };

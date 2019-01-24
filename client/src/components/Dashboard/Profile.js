@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image, Placeholder } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 
 const Profile = props => (
   <Card>

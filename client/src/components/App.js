@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Homepage from "./Homepage/Homepage";
 import Dashboard from "./Dashboard/Dashboard"
 import Login from "./Login/Login";
+import Results from "./Results/Results"
 import Signup from "./Signup/Signup"
 import Auth from "../utils/Auth";
 import JumboTron from './Homepage/Jumbotron'
@@ -28,6 +29,7 @@ class App extends Component {
         <div>
             <JumboTron authenticated={this.state.authenticated}/>
             <PropsRoute exact path="/" component={Homepage} toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
+            <PrivateRoute path="/results/:searchTerm" component={Results}/>
             <PrivateRoute path="/dashboard" component={Dashboard}/>
             <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
             <LoggedOutRoute path="/signup" component={Signup}/>

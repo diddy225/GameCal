@@ -1,32 +1,41 @@
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import Auth from '../utils/Auth';
+import { Loader } from 'semantic-ui-react'
 
 
 class LogoutFunction extends React.Component {
+  state = {
+    isLoading: false
+  }
 
   componentDidMount() {
     // deauthenticate user
     Auth.deauthenticateUser();
+    this.setState({isLoading: !this.state.isLoading})
     // change the current URL to / after logout
     this.props.history.push('/logout');
     setTimeout(() => {
+      this.setState({isLoading: !this.state.isLoading})
       this.props.history.push('/');
-    }, 500)
+    }, 1000)
   }
 
   render() {
+    const style ={
+      position: 'absolute',
+      top: '50%',
+      left: '50%'
+    }
     return (
-      <div>
-        <p>Logging out...</p>
-      </div>
+        <Loader 
+          style={style} 
+          size='massive'
+          active={this.state.isLoading} 
+          inline='centered'
+        />
     )
   }
 }
-
-LogoutFunction.contextTypes = {
-  router: PropTypes.object.isRequired
-};
 
 export default LogoutFunction;

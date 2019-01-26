@@ -28,7 +28,9 @@ class Login extends Component {
       .catch(( {response} ) => {
         const errors = response.data.errors ? response.data.errors : {};
         errors.summery = response.data.message;
-        console.log(errors)
+        this.setState({
+          errors
+        })
       })
   };
 
@@ -46,7 +48,7 @@ class Login extends Component {
   }
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, errors } = this.state;
     return (
       <Container style={style}>
         <LoginForm
@@ -54,6 +56,7 @@ class Login extends Component {
           handleSubmit={this.handleFormSubmit}
           email={email}
           password={password}
+          errors={errors}
         />
       </Container>
     );

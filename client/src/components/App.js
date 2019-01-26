@@ -29,7 +29,7 @@ class App extends Component {
         <div>
             <JumboTron authenticated={this.state.authenticated}/>
             <PropsRoute exact path="/" component={Homepage} toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
-            <PrivateRoute path="/results/:searchTerm" component={Results}/>
+            <PrivateRoute path="/results" component={Results}/>
             <PrivateRoute path="/dashboard" component={Dashboard}/>
             <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
             <LoggedOutRoute path="/signup" component={Signup}/>

@@ -7,20 +7,27 @@ const styleContainer = {display: 'flex', flexWrap:'wrap', justifyContent:'center
 const month = moment().format('MMMM');
 const day = moment().format('Do')
 
+const loader = (
+  <Loader 
+    size='massive'
+    active={true} 
+    inline='centered'
+  />
+)
 const GamesContainer = (props) => (
-  <Container style={ {height: '500px', marginTop: '50px'} }>
+  <div style={ {height: '100%', marginTop: '50px'} }>
   <Header 
     size="huge"
     textAlign='center'
   >
   <Icon fitted color={props.color} name={props.name}/> RELEASES FOR {month.toUpperCase()} {day.toUpperCase()}
   </Header>
-  {!props.coverIds ? <div>No Games Releasing Today</div> : (
+  {!props.coverIds ? loader : (
     <Container fluid style={styleContainer}>
       {props.coverIds.map(imgId => !imgId ? <Loader active inline /> : <GameCard key={imgId} id={imgId}/>)}
     </Container>
   )}
-</Container>
+</div>
 )
 
 export default GamesContainer

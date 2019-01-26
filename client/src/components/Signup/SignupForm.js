@@ -14,6 +14,7 @@ const SignupForm = (props) => (
     style={style} 
     onSubmit={props.handleSubmit}
   >
+    {props.error.summery}
     <Form.Field>
       <Input 
         name="username"

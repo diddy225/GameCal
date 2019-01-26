@@ -1,38 +1,33 @@
 import React, { Component } from "react";
-import { Input } from "semantic-ui-react";
+import { Input, Form } from "semantic-ui-react";
+import { Field, reduxForm } from "redux-form";
 
 class SearchInput extends Component {
-  state = {
-    searchTerm: ""
+  renderInput =({ input, placeholder }) => {
+    return (
+        <Input 
+          placeholder={placeholder}
+          style={{width:'450px'}} 
+          {...input}
+        />
+    )
   };
 
-  searchChange = e => {
-    const { value } = e.target;
-    this.setState({ searchTerm: value });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    this.setState({ searchTerm: "" });
-    console.log(this.state.searchTerm);
-  };
+  onSubmit(formValues) {
+    console.log(formValues)
+  }
 
   render() {
-    const { searchTerm } = this.state;
     return (
-        <form onSubmit={this.onSubmit}>
-          <Input
-            style={{ width: "550px", marginRight: "250px" }}
-            placeholder="Red Red Redemption, Rocket League..."
-            type="text"
-            icon="search"
-            iconPosition="left"
-            value={searchTerm}
-            onChange={this.searchChange}
-          />
-        </form>
+      <Form onSubmit={this.props.handleSubmit(this.onSubmit)} size='small'>
+        <Field 
+          name="searchInput" 
+          component={this.renderInput} 
+          placeholder='Red Dead Redemption, Rocket League'
+        />
+      </Form>
     );
   }
 }
 
-export default SearchInput;
+export default reduxForm({ form: "SearchInput" })(SearchInput);

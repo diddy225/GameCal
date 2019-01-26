@@ -1,17 +1,25 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getFormValues } from 'redux-form'
 
-class Results extends Component {
-  state = {
-
-  }
-
-  render() {
-    return (
-      <div>
-        RESULTS PAGE
-      </div>
-    )
+const mapStateToProps = (state) => {
+  return {
+       formStates: getFormValues('SearchInput')(state)
   }
 }
 
-export default Results
+class Results extends Component {
+ state = {
+
+ }
+
+ render() {
+  const searchTerm = !this.props.formStates ? 'Results' : this.props.formStates.searchInput
+  return(
+    <div>
+      {searchTerm}
+    </div>
+  )
+ }
+}
+export default connect(mapStateToProps)(Results)

@@ -2,8 +2,8 @@ import React from "react";
 import { Image } from "semantic-ui-react";
 
 const gameStyle = {
-  height: '350px', 
-  width: '250px', 
+  height: '290px', 
+  width: '200px', 
   marginRight: '10px',
   border:'1px solid #ccc'
 }

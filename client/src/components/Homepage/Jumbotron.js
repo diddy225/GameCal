@@ -22,6 +22,7 @@ class JumboTron extends Component {
 
   render() {
     const { fixed } = this.state;
+    const { SearchInput } = this.props
     return (
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
         <Visibility
@@ -38,6 +39,7 @@ class JumboTron extends Component {
             <Nav 
               authenticated={this.props.authenticated} 
               fixed={fixed} 
+              SearchInput={SearchInput}
             />
           </Segment>
         </Visibility>

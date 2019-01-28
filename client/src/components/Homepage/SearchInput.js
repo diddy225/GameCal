@@ -1,33 +1,57 @@
 import React, { Component } from "react";
 import { Input, Form } from "semantic-ui-react";
-import { Field, reduxForm } from "redux-form";
-
+import { connect } from 'react-redux';
+import { search } from '../../actions';
+ 
 class SearchInput extends Component {
-  renderInput =({ input, placeholder }) => {
-    return (
-        <Input 
-          placeholder={placeholder}
-          style={{width:'450px'}} 
-          {...input}
-        />
-    )
-  };
+  state = {
+    searchTerm: '',
+  }
 
-  onSubmit(formValues) {
-    console.log(formValues)
+  inputChange = (e) => {
+    const { value } = e.target
+    this.setState({
+      searchTerm: value
+    })
+  }
+
+  inputSubmit = (e) => {
+    e.preventDefault()
+    const currentlocation = this.props.history.location.pathname
+    this.props.search(this.state.searchTerm)
+    this.setState({
+      searchTerm: ''
+    })
+    if(currentlocation !== '/results' ){
+      this.props.history.push('/results')
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      searchTerm: ''
+    })
   }
 
   render() {
     return (
-      <Form onSubmit={this.props.handleSubmit(this.onSubmit)} size='small'>
-        <Field 
-          name="searchInput" 
-          component={this.renderInput} 
-          placeholder='Red Dead Redemption, Rocket League'
-        />
-      </Form>
+      <div>
+        <Form onSubmit={this.inputSubmit} size='small'>
+          <Input 
+            icon='search'
+            placeholder='Game Search...'
+            value={this.state.searchTerm}
+            type='text'
+            onChange={this.inputChange}
+            style={{width:'450px'}} 
+          />
+        </Form>
+      </div>      
     );
   }
 }
+const mapStateToProps = (state) => {
+  return { search: state.search }
+}
 
-export default reduxForm({ form: "SearchInput" })(SearchInput);
+export default connect(mapStateToProps, { search })(SearchInput);

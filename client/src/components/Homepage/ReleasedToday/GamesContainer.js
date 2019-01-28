@@ -14,20 +14,39 @@ const loader = (
     inline='centered'
   />
 )
-const GamesContainer = (props) => (
-  <div style={ {height: '100%', marginTop: '50px'} }>
-  <Header 
-    size="huge"
-    textAlign='center'
-  >
-  <Icon fitted color={props.color} name={props.name}/> RELEASES FOR {month.toUpperCase()} {day.toUpperCase()}
-  </Header>
-  {!props.coverIds ? loader : (
-    <Container fluid style={styleContainer}>
-      {props.coverIds.map(imgId => !imgId ? <Loader active inline /> : <GameCard key={imgId} id={imgId}/>)}
-    </Container>
-  )}
-</div>
-)
+const GamesContainer = (props) => {
+  if(!props.coverIds){
+    return(
+      <div style={ {height: '100%', marginTop: '50px'} }>
+      <Header 
+        size="huge"
+        textAlign='center'
+        style={{backgroundColor:'#eee', padding:'20px'}}
+      >
+      <Icon fitted color={props.color} name={props.name}/> RELEASES FOR {month.toUpperCase()} {day.toUpperCase()}
+      </Header>
+      <Container fluid style={styleContainer}>
+        <h3>NO GAMES RELEASES</h3>
+      </Container>
+    </div>
+    )
+  }
+  return (
+    <div style={ {height: '100%', marginTop: '50px'} }>
+    <Header 
+      size="huge"
+      textAlign='center'
+      style={{backgroundColor:'#eee', padding:'20px'}}
+    >
+    <Icon fitted color={props.color} name={props.name}/> RELEASES FOR {month.toUpperCase()} {day.toUpperCase()}
+    </Header>
+    {!props.coverIds ? loader : (
+      <Container fluid style={styleContainer}>
+        {props.coverIds.map(imgId => !imgId ? <Loader active inline /> : <GameCard key={imgId} id={imgId}/>)}
+      </Container>
+    )}
+  </div>
+  )
+}
 
 export default GamesContainer

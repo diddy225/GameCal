@@ -11,8 +11,8 @@ module.exports = function(app, system, consoleName ) {
   const year = moment().year();
   const month = moment().month() + 1;
   const date = moment().date();
-  const unix = `${moment.utc(`${year}-${month}-${date}`, "YYYY-M-DD").format('X')}`
-  const platforms = { switch: 130, xbox: 49, ps4: 48 };
+  const unix = `${moment.utc(`${year}-${month}-${date}`, "YYYY-M-DD").format('X')}`;
+  
   (async () => {
     try {
       const gamesReleasedToday = await $({

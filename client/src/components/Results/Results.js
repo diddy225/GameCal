@@ -1,25 +1,33 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { getFormValues } from 'redux-form'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import API from "../../utils/API";
 
-const mapStateToProps = (state) => {
-  return {
-       formStates: getFormValues('SearchInput')(state)
+class Results extends Component {
+  state = {
+    searchResults: []
+  };
+
+  searched = () => {
+    if (this.props.search) {
+      API.search({ term: this.props.search }).then(res => {
+          this.setState({searchResults: res.data});
+      });
+    }
+  }
+
+  render() {
+    console.log(this.state.searchResults)
+    this.searched()
+    return (
+      <div>
+        You searched for: {this.props.search ? this.props.search : "nothing"}
+      </div>
+    );
   }
 }
 
-class Results extends Component {
- state = {
+const mapStateToProps = state => {
+  return { search: state.search };
+};
 
- }
-
- render() {
-  const searchTerm = !this.props.formStates ? 'Results' : this.props.formStates.searchInput
-  return(
-    <div>
-      {searchTerm}
-    </div>
-  )
- }
-}
-export default connect(mapStateToProps)(Results)
+export default connect(mapStateToProps)(Results);

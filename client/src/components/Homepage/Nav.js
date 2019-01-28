@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import SearchInput from "./SearchInput";
+import { Route, Link } from "react-router-dom";
 import { Button, Menu } from "semantic-ui-react";
 
 const headerFont = {
@@ -18,10 +17,10 @@ const Nav = props => (
     secondary={!props.fixed}
     borderless={true}
   >
-    <Link to="/"><Menu.Item content="GameCal" style={headerFont}/></Link>
+    <Link to="/"><Menu.Item content="GameCal" style={headerFont}></Menu.Item></Link>
+    {props.authenticated ? <Menu.Item><Route component={props.SearchInput}></Route></Menu.Item> : null}
     {props.authenticated ? (
       <Menu.Item position="right">
-        <SearchInput />
         <Link to="/dashboard">
           <Button
             inverted={!props.fixed}

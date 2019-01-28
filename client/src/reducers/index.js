@@ -1,10 +1,16 @@
 import { createStore, combineReducers } from 'redux'
-import { reducer as reduxFormReducer } from 'redux-form'
 
+const searchReducer = (term = '', action) => {
+  if(action.type === 'SEARCH_TERM') {
+    return action.payload
+  }
+  return term
+}
 
- const reducer = combineReducers({
-  form: reduxFormReducer
+const reducer = combineReducers({
+  search: searchReducer
 });
+
 const store = (window.devToolsExtension
   ? window.__REDUX_DEVTOOLS_EXTENSION__()(createStore)
   : createStore)(reducer);

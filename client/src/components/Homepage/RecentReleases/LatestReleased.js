@@ -11,7 +11,6 @@ componentDidMount() {
 }
 
 gameCardRender = () => {
-  console.log(this.props.recentReleasedList)
  return this.props.recentReleasedList.map(elem => {
     return (
       <GameCard 

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 
 export const search = (term) => {
   return {
@@ -13,8 +14,9 @@ export const getSearch = (term) => async dispatch => {
   dispatch({ type: 'GET_RESULTS', payload: response.data });
 }
 
-export const recentReleased = () => async dispatch => {
+export const recentReleased = () => dispatch => _recentReleased(dispatch);
+const _recentReleased = _.memoize(async (dispatch) => {
   const response = await axios.get('/api/recently_released');
   
   dispatch({ type: 'GET_RECENTLY_RELEASED', payload: response.data })
-}
+});

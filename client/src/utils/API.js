@@ -6,7 +6,5 @@ export default {
   signUp: userData => 
     axios.post('/signup', userData),
   dashboard: token =>
-    axios.get('/dashboard', {headers: {Authorization: `bearer ${token}`}}),
-  search: term =>
-    axios.post(`/api/results`, term)
+    axios.get('/dashboard', {headers: {Authorization: `bearer ${token}`}})
 }

@@ -1,10 +1,10 @@
 import React from 'react'
-import ReleasedToday from './ReleasedToday/ReleasedToday'
+import RecentReleases from './RecentReleases/RecentReleases';
 
 const Homepage = (props) => {
   return (
     <div>
-      <ReleasedToday toggleAuthenticateStatus={props.toggleAuthenticateStatus}/>
+      <RecentReleases toggleAuthenticateStatus={props.toggleAuthenticateStatus}/>
     </div>
   )
 }

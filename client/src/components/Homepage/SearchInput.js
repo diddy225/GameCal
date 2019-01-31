@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Input, Form } from "semantic-ui-react";
 import { connect } from 'react-redux';
-import { search } from '../../actions';
+import { search, getSearch } from '../../actions';
  
 class SearchInput extends Component {
   state = {
@@ -19,6 +19,7 @@ class SearchInput extends Component {
     e.preventDefault()
     const currentlocation = this.props.history.location.pathname
     this.props.search(this.state.searchTerm)
+    this.props.getSearch(this.state.searchTerm)
     this.setState({
       searchTerm: ''
     })
@@ -39,7 +40,7 @@ class SearchInput extends Component {
         <Form onSubmit={this.inputSubmit} size='small'>
           <Input 
             icon='search'
-            placeholder='Game Search...'
+            placeholder='Search for a game...'
             value={this.state.searchTerm}
             type='text'
             onChange={this.inputChange}
@@ -51,7 +52,9 @@ class SearchInput extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { search: state.search }
+  return { 
+    searchTerm: state.searchTerm,
+  }
 }
 
-export default connect(mapStateToProps, { search })(SearchInput);
+export default connect(mapStateToProps, { search, getSearch })(SearchInput);

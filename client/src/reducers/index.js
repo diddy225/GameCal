@@ -1,18 +1,13 @@
-import { createStore, combineReducers } from 'redux'
+import { combineReducers } from 'redux'
+import searchTermReducer from './searchTermReducer'
+import searchReducer from './searchReducer'
+import recentlyReleasedReducer from './recentlyReleasedReducer'
 
-const searchReducer = (term = '', action) => {
-  if(action.type === 'SEARCH_TERM') {
-    return action.payload
-  }
-  return term
-}
-
-const reducer = combineReducers({
-  search: searchReducer
+const reducers = combineReducers({
+  searchTerm: searchTermReducer,
+  searchResults: searchReducer,
+  recentlyReleased: recentlyReleasedReducer
 });
 
-const store = (window.devToolsExtension
-  ? window.__REDUX_DEVTOOLS_EXTENSION__()(createStore)
-  : createStore)(reducer);
 
-export default store
+export default reducers

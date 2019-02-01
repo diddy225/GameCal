@@ -11,7 +11,7 @@ const GameCard = props => {
         </Reveal.Content>
         <Reveal.Content hidden>
           <Card.Content textAlign="center">
-            <Card.Header as='h2'>{props.name}</Card.Header>
+            <Card.Header as='a'>{props.name}</Card.Header>
             <Card.Meta>
               <span className="date">{props.releaseDate}</span>
             </Card.Meta>

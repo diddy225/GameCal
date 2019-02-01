@@ -27,7 +27,7 @@ gameCardRender = () => {
 render() {
 
   return (
-    <Card.Group itemsPerRow={3}>
+    <Card.Group itemsPerRow={6}>
       {this.gameCardRender()}
     </Card.Group>
   )

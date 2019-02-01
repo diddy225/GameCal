@@ -20,7 +20,7 @@ const lastSaturday = moment
   .format("X");
 const key = process.env.IGDB_KEY;
 
-module.exports = function(app, system, consoleName) {
+module.exports = function(app) {
   
   app.get('/api/recently_released', (req, res) => {
     (async function searchResults() {
@@ -43,4 +43,8 @@ module.exports = function(app, system, consoleName) {
       }
     })();
   });
+
+  app.get('/api/released_games', (req, res) => {
+    res.json({success: 'true'})
+  })
 };

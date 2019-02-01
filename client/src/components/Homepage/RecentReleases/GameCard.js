@@ -7,11 +7,11 @@ const GameCard = props => {
     <Card>
       <Reveal animated="move">
         <Reveal.Content visible>
-          <Image rounded as="a" src={url} />
+          <Image rounded src={url} centered />
         </Reveal.Content>
         <Reveal.Content hidden>
           <Card.Content textAlign="center">
-            <Card.Header>{props.name}</Card.Header>
+            <Card.Header as='h2'>{props.name}</Card.Header>
             <Card.Meta>
               <span className="date">{props.releaseDate}</span>
             </Card.Meta>

@@ -27,14 +27,13 @@ class RecentReleases extends Component {
           <LatestReleased />
         </Segment>
         <Header dividing as='h1'>Game Releases</Header>
-        <Tab games={this.props} menu={{ fluid: true, vertical: true, tabular: true }} panes={mainPanes} />
+        <Tab games={this.props.games} menu={{ fluid: true, vertical: true, tabular: true }} panes={mainPanes} />
       </Container>
     ); 
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {games: state.releasedGames}
 }
 

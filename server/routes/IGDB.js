@@ -45,7 +45,7 @@ module.exports = function(app) {
             Accept: "application/json",
             "user-key": process.env.IGDB_KEY
           },
-          data: `fields game, date, game.name, game.cover.url, human, game.platforms; sort date asc; limit 50;
+          data: `fields game, date, game.name, game.cover.url, human, game.platforms.name; sort date asc; limit 50;
                   where platform = (48,49,130) & date >= ${yesterdayUnix} & date <= ${tomrrowUnix};`
         });
         const duplicatesRemoved = results.data.filter((elem, index, self) =>

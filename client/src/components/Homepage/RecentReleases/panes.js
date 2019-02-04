@@ -1,12 +1,25 @@
 import React from 'react'
-import M from 'moment'
+import moment from 'moment'
 import { Tab } from 'semantic-ui-react'
-//GET THE UNIX CODES AND ADD FILTERS, SO YOU CAN SHOW THOSE IN THE TABS.
+const yesterdayUnix = moment.utc().startOf('day').subtract(1, 'd').format('X')
+const tomrrowUnix = moment.utc().startOf('day').add(1, 'd').format('X')
+const todayUnix = moment.utc().startOf('day').format('X')
+const today = moment().format("MM/DD")
 
-const today = M().format("MM/DD")
+
+//YOU WILL NEED AN API CALL FOR EACH CONSOLE PER DAY...UNLESS YOU CAN FIGURE OUT ANOTHER WAY???
+const xboxPane = (props,unixStamp) => {
+  return (
+    <Tab.Pane attached={false}>
+      <div>
+        { props.games.filter(elem => elem.date === parseInt(unixStamp)).filter(elem => elem.game.platforms.filter(c => c.name === "Xbox One")) }
+      </div>
+    </Tab.Pane>
+  )
+}
 
 export const xboxPanes = [
-  { menuItem: 'Yesterday', render: (props) => <Tab.Pane attached={false}>{console.log(props.games.games.filter(elem => elem.date === 1548892800))}</Tab.Pane> },
+  { menuItem: 'Yesterday', render: (props) => xboxPane(props, yesterdayUnix)},
   { menuItem: `${today}`, render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
   { menuItem: 'Tommorow', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
 ]

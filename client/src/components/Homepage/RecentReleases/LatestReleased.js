@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card } from 'semantic-ui-react'
+import { Item, Grid } from 'semantic-ui-react'
 import GameCard from '../RecentReleases/GameCard'
 import { recentReleased } from '../../../actions'
 
@@ -13,13 +13,15 @@ componentDidMount() {
 gameCardRender = () => {
  return this.props.recentReleasedList.map(elem => {
     return (
+      <Grid.Column key={elem.game.id}>
+      <Item.Group>
       <GameCard 
-        key={elem.game.id}
         url={elem.game.cover.image_id}
         name={elem.game.name}
         releaseDate={elem.human}
-        system='Xbox'
       />
+      </Item.Group>
+      </Grid.Column>
     )
   })
 }
@@ -27,9 +29,9 @@ gameCardRender = () => {
 render() {
 
   return (
-    <Card.Group itemsPerRow={6}>
+    <Grid celled centered columns={4}>
       {this.gameCardRender()}
-    </Card.Group>
+    </Grid>
   )
  }
 }

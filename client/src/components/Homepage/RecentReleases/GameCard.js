@@ -1,25 +1,19 @@
 import React from "react";
-import { Image, Reveal, Card } from "semantic-ui-react";
+import { Link } from 'react-router-dom'
+import { Item } from "semantic-ui-react";
 
 const GameCard = props => {
   const url = `https://images.igdb.com/igdb/image/upload/t_screenshot_med_2x/${props.url}.jpg`;
   return (
-    <Card>
-      <Reveal animated="move">
-        <Reveal.Content visible>
-          <Image rounded src={url} centered />
-        </Reveal.Content>
-        <Reveal.Content hidden>
-          <Card.Content textAlign="center">
-            <Card.Header as='a'>{props.name}</Card.Header>
-            <Card.Meta>
-              <span className="date">{props.releaseDate}</span>
-            </Card.Meta>
-            <Card.Description>{props.system}</Card.Description>
-          </Card.Content>
-        </Reveal.Content>
-      </Reveal>
-    </Card>
+    <Item>
+      <Item.Image size='small' as={Link} to='/dashboard' src={url}/>
+      <Item.Content>
+      <Item.Header as='a'>{props.name}</Item.Header>
+      <Item.Description>
+        <span>{props.releaseDate.toUpperCase()}</span>
+      </Item.Description>
+      </Item.Content>
+    </Item>
   );
 };
 

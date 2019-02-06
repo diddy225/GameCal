@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getSearch } from '../../actions/'
-import { Item, Container, Label } from 'semantic-ui-react' 
+import { Item, Segment, Label } from 'semantic-ui-react' 
 import moment from 'moment'
 
 const headerStyle = {
@@ -37,20 +37,19 @@ class Results extends Component {
 
   render() {
     return (
-      <Container>
+      <Segment>
         <h2 style={headerStyle}>{this.props.results.length} RESULTS FOR: {this.props.searchTerm ? this.props.searchTerm : null}</h2>
         <Item.Group divided>
         {this.props.results.length !== 0 ? 
           this.props.results.map(game => this.renderItemCard(game.id, game.cover.image_id, game.name, game.summary, game.platforms, game.first_release_date))
           : null}
         </Item.Group>
-      </Container>
+      </Segment>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return { 
     results: state.searchResults,
     searchTerm: state.searchTerm

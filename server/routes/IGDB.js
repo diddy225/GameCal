@@ -3,9 +3,9 @@ const moment = require("moment");
 const lastSundayUnix = moment.utc().startOf('day').day(-7).format("X");
 const lastSaturdayUnix = moment.utc().startOf('day').day(-1).format("X");
 
-const yesterdayUnix = moment.utc().startOf('day').subtract(1, 'd').format('X')
-const tomrrowUnix = moment.utc().startOf('day').add(1, 'd').format('X')
-const todayUnix = moment.utc().startOf('day').format('X')
+const yesterdayUnix = moment.utc().startOf('day').subtract(2, 'd').format('X')
+const tomrrowUnix = moment.utc().startOf('day').format('X')
+const todayUnix = moment.utc().startOf('day').subtract(1, 'd').format('X')
 
 module.exports = function(app) {
   
@@ -19,7 +19,7 @@ module.exports = function(app) {
             Accept: "application/json",
             "user-key": process.env.IGDB_KEY
           },
-          data: `fields game, date, game.name, game.cover.image_id, human, game.platforms; sort date asc; limit 50;
+          data: `fields game, date, game.name, game.cover.image_id, human, game.platforms.name; sort date asc; limit 50;
                   where game.cover.image_id != null & 
                   platform = (48,49,130) & 
                   date > ${lastSundayUnix} & 
@@ -45,8 +45,8 @@ module.exports = function(app) {
             Accept: "application/json",
             "user-key": process.env.IGDB_KEY
           },
-          data: `fields game, date, game.name, game.cover.url, human, game.platforms.name; sort date asc; limit 50;
-                  where platform = (48,49,130) & date >= ${yesterdayUnix} & date <= ${tomrrowUnix};`
+          data: `fields game, date, game.name, game.cover.image_id, human, game.platforms.name; sort date asc; limit 50;
+                  where game.platforms != null & platform = (48,49,130) & date >= ${yesterdayUnix} & date <= ${tomrrowUnix};`
         });
         const duplicatesRemoved = results.data.filter((elem, index, self) =>
             index === self.findIndex(isElem => isElem.game.id === elem.game.id)

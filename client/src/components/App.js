@@ -10,6 +10,7 @@ import Auth from "../utils/Auth";
 import JumboTron from './Homepage/Jumbotron'
 import LogoutFunction from './LogoutFunction'
 import { PrivateRoute, PropsRoute, LoggedOutRoute } from './Routes'
+import Footer from './Footer/Footer'
 
 class App extends Component {
   state = {
@@ -35,6 +36,7 @@ class App extends Component {
           <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
           <LoggedOutRoute path="/signup" component={Signup}/>
           <Route path="/logout" toggleAuthenticateStatus={this.toggleAuthenticateStatus} component={LogoutFunction}/>
+          <Footer />
       </div>
       </Router>
     );

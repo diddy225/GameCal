@@ -44,7 +44,7 @@ class SearchInput extends Component {
             value={this.state.searchTerm}
             type='text'
             onChange={this.inputChange}
-            style={{width:'450px'}} 
+            style={{marginLeft:'200px', width:'350px'}} 
           />
         </Form>
       </div>      

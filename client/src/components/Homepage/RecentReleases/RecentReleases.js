@@ -11,7 +11,6 @@ const mainPanes = [
   { menuItem: 'Nintendo Switch', render: (props) => <Tab.Pane><Tab games={props.games} defaultActiveIndex={1} menu={{ secondary: true, pointing: true }} panes={switchPanes} /></Tab.Pane> },
 ]
 
-
 class RecentReleases extends Component {
 
   componentDidMount() {
@@ -21,14 +20,14 @@ class RecentReleases extends Component {
 
   render() {
     return (
-      <Container>
-        <Header as='h1'>Latest Releases</Header>
-        <Segment>
-          <LatestReleased />
-        </Segment>
-        <Header dividing as='h1'>Game Releases</Header>
-        <Tab games={this.props.games} menu={{ fluid: true, vertical: true, tabular: true }} panes={mainPanes} />
-      </Container>
+        <Container fluid style={{padding:'0 50px'}}>
+          <Header style={{marginTop:'20px'}}dividing as='h1'>Released This Week</Header>
+          <Tab games={this.props.games} menu={{ fluid: true, vertical: true, tabular: true }} panes={mainPanes} />
+          <Header dividing as='h1'>Released Last Week</Header>
+          <Segment>
+            <LatestReleased />
+          </Segment>
+        </Container>
     ); 
   }
 }

@@ -19,6 +19,7 @@ gameCardRender = () => {
         url={elem.game.cover.image_id}
         name={elem.game.name}
         releaseDate={elem.human}
+        id={elem.game.id}
       />
       </Item.Group>
       </Grid.Column>

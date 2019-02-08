@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Homepage from "./Homepage/Homepage";
+import GameRender from "./GameRender/GameRender"
 import Dashboard from "./Dashboard/Dashboard"
 import SearchInput from "./Homepage/SearchInput";
 import Login from "./Login/Login";
@@ -10,7 +11,7 @@ import Auth from "../utils/Auth";
 import JumboTron from './Homepage/Jumbotron'
 import LogoutFunction from './LogoutFunction'
 import { PrivateRoute, PropsRoute, LoggedOutRoute } from './Routes'
-import Footer from './Footer/Footer'
+//mport Footer from './Footer/Footer'
 
 class App extends Component {
   state = {
@@ -32,11 +33,11 @@ class App extends Component {
           <JumboTron SearchInput={SearchInput} authenticated={this.state.authenticated}/>
           <PropsRoute exact path="/" component={Homepage} toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
           <PrivateRoute path="/results" component={Results}/>
+          <PrivateRoute path="/games" component={GameRender}/>
           <PrivateRoute path="/dashboard" component={Dashboard}/>
           <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
           <LoggedOutRoute path="/signup" component={Signup}/>
           <Route path="/logout" toggleAuthenticateStatus={this.toggleAuthenticateStatus} component={LogoutFunction}/>
-          <Footer />
       </div>
       </Router>
     );

@@ -27,3 +27,10 @@ const _releasedGames = _.memoize(async (dispatch) => {
 
   dispatch({type: 'GET_RELEASED_GAMES', payload: response.data});
 });
+
+export const getClickedGame = (id) => dispatch => _getClickedGame(dispatch, id);
+const _getClickedGame = _.memoize(async (dispatch, id) => {
+  const response = await axios.get(`/api/get_game/?${id}`, {id});
+
+  dispatch({type: 'GET_CLICKED_GAME', payload: response.data})
+})

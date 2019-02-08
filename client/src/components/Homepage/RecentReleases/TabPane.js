@@ -16,6 +16,7 @@ const TabPane = (arr, unixStamp, platform) => {
                 url={ele.game.cover.image_id}
                 name={ele.game.name}
                 releaseDate={ele.human}
+                id={ele.game.id}
               />
             );
           })}

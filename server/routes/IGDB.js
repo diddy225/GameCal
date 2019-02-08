@@ -57,4 +57,9 @@ module.exports = function(app) {
       }
     })();
   })
+
+  app.get(`/api/get_game/`, (req, res) => {
+    console.log('helo')
+    console.log(req.body.term)
+  })
 };

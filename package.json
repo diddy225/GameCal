@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "build": "cd ../ && cd client && yarn run build",
+    "build": "cd client && yarn run build",
     "heroku-postbuild": "cd server && yarn run build",
-    "server": "nodemon server.js",
-    "client": "cd ../ && cd client && yarn start"
+    "server": "cd server && nodemon server.js",
+    "client": "cd client && yarn start"
   },
   "dependencies": {
     "apicalypse": "^0.0.6",

@@ -2,6 +2,9 @@
   "name": "gelp",
   "version": "1.0.0",
   "description": "Video Game News/Blog",
+  "engines": {
+    "node": "11.0.0"
+  },
   "main": "server",
   "author": "Matthew Carpenter",
   "license": "MIT",

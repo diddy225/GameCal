@@ -8,7 +8,7 @@ const GameCard = props => {
     <Item>
       <Item.Image size='small' as={Link} to={`/games/?${props.id}`} src={url}/>
       <Item.Content>
-      <Item.Header as='a'>{props.name}</Item.Header>
+      <Item.Header as={Link} to={`/games/?${props.id}`}>{props.name}</Item.Header>
       <Item.Description>
         <span>{props.releaseDate.toUpperCase()}</span>
       </Item.Description>

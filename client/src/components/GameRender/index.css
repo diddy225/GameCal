@@ -1,0 +1,10 @@
+
+.background-image {
+  filter: blur(4px);
+}
+
+.item-position{
+  position: relative;
+  bottom: 250px;
+  left: 100px;
+}

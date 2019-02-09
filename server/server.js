@@ -18,9 +18,6 @@ const localLoginStrategy = require('./passport/local-login');
 require('./routes/search')(app);
 require('./routes/IGDB')(app);
 require('./routes/auth')(app);
-// app.get('*', (req,res) => {
-//   res.sendFile(path.join(__dirname, “../client/build/index.html”));
-// })
 
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);

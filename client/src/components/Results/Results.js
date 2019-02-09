@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom"
 import { getSearch } from '../../actions/'
 import { Item, Segment, Label } from 'semantic-ui-react' 
 import moment from 'moment'
@@ -18,10 +19,10 @@ class Results extends Component {
     const availableConsole = system.map(system => system.name)
     return (
       <Item key={id}>
-        <Item.Image as='a' size='medium' src={`https://images.igdb.com/igdb/image/upload/t_screenshot_med_2x/${imageID}.jpg`} />
+        <Item.Image as={Link} to={`/games/?${id}`} size='medium' src={`https://images.igdb.com/igdb/image/upload/t_screenshot_med_2x/${imageID}.jpg`} />
 
         <Item.Content>
-          <Item.Header as='a'>{gameName}</Item.Header>
+          <Item.Header as={Link} to={`/games/?${id}`}>{gameName}</Item.Header>
           <Item.Meta>Description</Item.Meta>
           <Item.Description>
             {gameDescription}

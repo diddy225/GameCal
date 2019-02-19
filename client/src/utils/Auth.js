@@ -4,10 +4,11 @@ class Auth {
    *
    * @param {string} token
    */
-  static authenticateUser(token, username, successMessage) {
+  static authenticateUser(token, username, successMessage, _id) {
     localStorage.setItem("token", token);
-    localStorage.setItem("username", username)
-    localStorage.setItem("successMessage", successMessage)
+    localStorage.setItem("username", username);
+    localStorage.setItem("successMessage", successMessage);
+    localStorage.setItem("_id", _id)
   }
 
   /**

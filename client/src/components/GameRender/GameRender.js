@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getClickedGame } from "../../actions/index";
-import { Image, Placeholder, Container, Item, Label, Rating } from 'semantic-ui-react' 
+import { getClickedGame, favoriteGame } from "../../actions/index";
+import { Image, Placeholder, Container, Item, Label, Button } from 'semantic-ui-react' 
 import './index.css'
 
 const headerStyle = {
@@ -12,6 +12,12 @@ const headerStyle = {
 }
 
 class GameRender extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showMsg: false
+    }
+  }
 
   componentDidMount() {
     this.props.getClickedGame(window.location.search.substring(1));
@@ -19,6 +25,24 @@ class GameRender extends Component {
 
   componentWillUnmount() {
     this.props.getClickedGame('');
+  }
+
+  favorite = (e) => {
+    e.preventDefault()
+    const id = this.props.game[0].id
+    this.props.favoriteGame(id)
+    this.setState({
+      showMsg: true
+    });
+    setTimeout(() => {
+      this.setState({
+        showMsg: false
+      });
+    }, 700)
+  }
+
+  addedGame = () => {
+    
   }
 
   render() {
@@ -37,7 +61,16 @@ class GameRender extends Component {
             <Item.Content>
               <Item.Header style={headerStyle}>{this.props.game[0].name}</Item.Header>
               <Item.Meta style={{color:'#fff', fontSize:'1.5em'}}>Released: {this.props.game[0].release_dates[0].human}</Item.Meta>
-              <Item.Meta><Rating maxRating={5} defaultRating={3} icon='star' size='massive'/></Item.Meta>
+              <Item.Meta> 
+                <Button 
+                  size="small"
+                  onClick={this.favorite}
+                  color={"green"}
+                  >
+                    {"FOLLOW"}
+                </Button>
+                <span>{this.state.showMsg ? "Game Added!"  : ''}</span>
+              </Item.Meta>
             </Item.Content>
           </Item>
         </Item.Group>
@@ -49,7 +82,7 @@ class GameRender extends Component {
         </Container>
         <Container style={{marginTop: '100px'}}fluid textAlign='center'>
           <Image.Group size='big'>
-            {this.props.game[0].screenshots.map(image => <Image src={`https://images.igdb.com/igdb/image/upload/t_screenshot_big_2x/${image.image_id}.jpg`}/> )}
+            {this.props.game[0].screenshots.map((image, i) => <Image key={i} src={`https://images.igdb.com/igdb/image/upload/t_screenshot_big_2x/${image.image_id}.jpg`}/> )}
           </Image.Group>
         </Container>
         </div>
@@ -59,12 +92,14 @@ class GameRender extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state.getGame)
-  return { game: state.getGame };
+const mapStateToProps = (state) => {
+  return { 
+    game: state.getGame,
+    favAddedMsg: state.favoriteAddedMessage
+  };
 };
 
 export default connect(
   mapStateToProps,
-  { getClickedGame }
+  { favoriteGame , getClickedGame}
 )(GameRender);

@@ -14,6 +14,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  favorites: {
+    type: Array
+  },
   date: {
     type: Date,
     default: Date.now
@@ -42,4 +45,4 @@ UserSchema.pre('save', function saveHook(next) {
   });
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Users', UserSchema);

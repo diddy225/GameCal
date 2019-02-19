@@ -22,7 +22,7 @@ require('./routes/auth')(app);
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Gelp", { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/Gelp", { useNewUrlParser: true })
 .then(() => console.log('DB Connected'))
 .catch((err) => {
   console.log(err)

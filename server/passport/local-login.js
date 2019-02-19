@@ -14,7 +14,7 @@ module.exports = new PassportLocalStrategy({
     password: password.trim()
   };
 
-  return db.User.findOne({ email: userData.email }, (err, user) => {
+  return db.Users.findOne({ email: userData.email }, (err, user) => {
     
     if(err) { return done(err); }
 
@@ -41,7 +41,8 @@ module.exports = new PassportLocalStrategy({
 
       const token = jwt.sign(payload, config.jwtSecret);
       const data = {
-        username: user.username
+        username: user.username,
+        _id: user._id
       };
       
       return done(null, token, data);

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getFavorites } from "../../actions/index";
+import FavoriteCard from './FavoriteCard'
 import Profile from "./Profile";
-import { Grid, Segment, Header, Item, Image } from "semantic-ui-react";
+import { Grid, Segment, Header, Item } from "semantic-ui-react";
 
 class Dashboard extends Component {
   state = {
@@ -10,9 +13,11 @@ class Dashboard extends Component {
   componentDidMount() {
     const username = localStorage.getItem("username");
     this.setState({ activeUser: username });
+    this.props.getFavorites()
   }
 
   render() {
+    console.log(this.props)
     const user = this.state.activeUser
       ? this.state.activeUser.toUpperCase()
       : null;
@@ -23,19 +28,25 @@ class Dashboard extends Component {
         </Grid.Column>
         <Grid.Column width="thirteen">
           <Segment>
-            <Header>MY WAITLIST</Header>
-            <Item.Group>
-              <Item>
-                <Item.Image as="a" size="tiny" src="https://react.semantic-ui.com/images/wireframe/image.png"/>
-                <Item.Content>
-                  <Item.Header as="a">Rocket League</Item.Header>
-                  <Item.Meta>Description</Item.Meta>
-                  <Item.Description>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-                  </Item.Description>
-                </Item.Content>
-              </Item>
+            <Header>My Favorite Games</Header>
+            {this.props.favorites.length !== 0 ?
+            <Item.Group divided>
+              {this.props.favorites.map(game => {
+                return (
+                  <FavoriteCard 
+                  key={game.id}
+                  url={game.cover.image_id}
+                  id={game.id}
+                  name={game.name}
+                  description={game.summary}
+                  platforms={game.platforms}
+                  rating={game.total_rating}
+                  /> 
+                )
+              })}
             </Item.Group>
+            :
+            <div>You have no Favorites</div>}
           </Segment>
         </Grid.Column>
       </Grid>
@@ -43,4 +54,13 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    favorites: state.favoriteGames
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {getFavorites}
+)(Dashboard);

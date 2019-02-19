@@ -3,8 +3,12 @@
   filter: blur(4px);
 }
 
-.item-position{
+.item-position {
   position: relative;
   bottom: 250px;
   left: 100px;
+}
+
+.game-add {
+  transition: 0.5s
 }

@@ -21,7 +21,7 @@ class Login extends Component {
     e.preventDefault();
     API.login({ email, password })
       .then(res => {
-        Auth.authenticateUser(res.data.token, res.data.user.username, res.data.message);
+        Auth.authenticateUser(res.data.token, res.data.user.username, res.data.message, res.data.user._id);
         this.props.toggleAuthenticateStatus();
         this.props.history.push('/dashboard');
       })

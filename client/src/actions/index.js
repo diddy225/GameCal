@@ -8,7 +8,19 @@ export const search = (term) => {
   }
 }
 
-export const getSearch = (term) => async dispatch => {
+export const getFavorites = () =>  async dispatch => {
+  const response = await axios.post('/api/get_favorites', { _id:localStorage.getItem('_id') });
+
+  dispatch({ type: 'GET_FAVORITES', payload: response.data});
+};
+
+export const favoriteGame = (gameId) => async dispatch => {
+  const response = await axios.put('/api/favorites', {_id:localStorage.getItem('_id'), game: gameId});
+
+  dispatch({ type: 'FAVORITE_GAMES', payload: response.data});
+};
+
+export const getSearch = (term) => async dispatch => { 
   const response = await axios.post('/api/results', {term});
 
   dispatch({ type: 'GET_RESULTS', payload: response.data });

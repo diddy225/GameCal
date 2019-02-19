@@ -14,7 +14,7 @@ module.exports = new PassportLocalStrategy({
     username: req.body.username.trim()
   }
 
-  const newUser = new db.User(userData);
+  const newUser = new db.Users(userData);
   newUser.save((err) => {
     if(err) { return done(err); }
 
